@@ -26,7 +26,7 @@ fn get_type_parser(ty: &Type) -> Option<ParserTree> {
                 "i8"  |
                 "i16" |
                 "i32" |
-                "i64"    => Some(ParserTree::Raw(format!("be_{}", ident_s))),
+                "i64"    => Some(ParserTree::Raw(format!("le_{}", ident_s))),
                 "Option" => {
                     match segment.arguments {
                         PathArguments::AngleBracketed(ref ab) => {
