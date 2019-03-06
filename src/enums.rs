@@ -141,7 +141,7 @@ fn impl_nom_fieldless_enums(ast: &syn::DeriveInput, repr:String, debug:bool) -> 
             .collect();
     let tokens = quote!{
         impl#generics #name#generics {
-            fn parse(i: &[u8]) -> IResult<&[u8],#name> {
+            pub fn parse(i: &[u8]) -> IResult<&[u8],#name> {
                 map_opt!(
                     i,
                     #parser,
@@ -236,7 +236,7 @@ pub(crate) fn impl_nom_enums(ast: &syn::DeriveInput, debug:bool) -> TokenStream 
         else { quote!{ _ => Err(nom::Err::Error(error_position!(i, nom::ErrorKind::Switch))) } };
     let tokens = quote!{
         impl#generics #name#generics {
-            fn parse(i: &[u8], selector: #selector_type) -> IResult<&[u8],#name> {
+            pub fn parse(i: &[u8], selector: #selector_type) -> IResult<&[u8],#name> {
                 match selector {
                     #(#variants_code)*
                     #default_case

@@ -557,7 +557,7 @@ fn impl_nom(ast: &syn::DeriveInput, debug:bool) -> TokenStream {
     };
     let tokens = quote! {
         impl#generics #name#generics {
-            fn parse(i: &[u8]) -> IResult<&[u8],#name> {
+            pub fn parse(i: &[u8]) -> IResult<&[u8],#name> {
                 do_parse!{
                     i,
                     #(#idents: #parser_tokens >>)*
